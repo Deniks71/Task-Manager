@@ -12,15 +12,31 @@ const tarefas = [
 ];
 
 
-//Lista todas as atividades
+//Lista todas as tasks
 app.get('/tasks', (req,res)=> {
     res.status(200).send(tarefas);
 });
 
-//Insere uma nova atividade na lista de atividades, através do corpo da requisição.
+//Lista uma tarefa especifica
+app.get('/tasks/:id', (req,res)=>{
+    res.json(buscaTaskPorId(req.params.id));
+});
+
+//Cria uma nova Task
 app.post('/tasks', (req,res)=> {
     tarefas.push(req.body)
     res.status(200).send('Atividade criada');
 });
+
+
+
+//Função para achar um ID igual
+function buscaTaskPorId (id){
+    for(let i = 0; i < tarefas.length; i++) {
+        if(tarefas[i].id == id){
+            return tarefas[i]
+        }
+    }
+}
 
 export default app;
