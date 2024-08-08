@@ -11,9 +11,6 @@ const tarefas = [
     {id: 4, titulo: "Exercicio fisico", descricao: "Sair para fazer trilha de Bike", status: "pendente"},
 ];
 
-app.get('/', (req,res)=> {
-    res.send('Hello World');
-});
 
 //Lista todas as atividades
 app.get('/tasks', (req,res)=> {
