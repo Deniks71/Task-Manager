@@ -11,7 +11,6 @@ const tarefas = [
     {id: 4, titulo: "Exercicio fisico", descricao: "Sair para fazer trilha de Bike", status: "pendente"},
 ];
 
-
 //Lista todas as tasks
 app.get('/tasks', (req,res)=> {
     res.status(200).send(tarefas);
@@ -28,13 +27,29 @@ app.post('/tasks', (req,res)=> {
     res.status(200).send('Atividade criada');
 });
 
+//deleta task
+app.delete('/tasks/:id', (req,res)=> {
+    let index = buscaIndexDaTask(req.params.id);
+    tarefas.splice(index,1)
+    res.send(`Atividade com ID ${req.params.id} Exluida com sucesso`);
+})
 
 
-//Função para achar um ID igual
+
+//Função para achar um ID igual(OBS, pode ser usada a Funçao pre pronta do javascript "filter")
 function buscaTaskPorId (id){
     for(let i = 0; i < tarefas.length; i++) {
         if(tarefas[i].id == id){
             return tarefas[i]
+        }
+    }
+}
+
+//Função para achar o index para saber a opcao da atividade de um ID especifico.
+function buscaIndexDaTask(id){
+    for(let i = 0; i < tarefas.length; i++){
+        if(tarefas[i].id == id){
+            return i;
         }
     }
 }
