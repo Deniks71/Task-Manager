@@ -11,6 +11,12 @@ const tarefas = [
     {id: 4, titulo: "Exercicio fisico", descricao: "Sair para fazer trilha de Bike", status: "pendente"},
 ];
 
+//Cria uma nova Task
+app.post('/tasks', (req,res)=> {
+    tarefas.push(req.body)
+    res.status(200).send('Atividade criada');
+});
+
 //Lista todas as tasks
 app.get('/tasks', (req,res)=> {
     res.status(200).send(tarefas);
@@ -21,19 +27,6 @@ app.get('/tasks/:id', (req,res)=>{
     res.json(buscaTaskPorId(req.params.id));
 });
 
-//Cria uma nova Task
-app.post('/tasks', (req,res)=> {
-    tarefas.push(req.body)
-    res.status(200).send('Atividade criada');
-});
-
-//deleta task
-app.delete('/tasks/:id', (req,res)=> {
-    let index = buscaIndexDaTask(req.params.id);
-    tarefas.splice(index,1)
-    res.send(`Atividade com ID ${req.params.id} Exluida com sucesso`);
-})
-
 //Atualiza Task
 app.put('/tasks/:id', (req,res)=> {
     let index = buscaIndexDaTask(req.params.id);
@@ -43,6 +36,12 @@ app.put('/tasks/:id', (req,res)=> {
     res.json(tarefas)
 })
 
+//deleta task
+app.delete('/tasks/:id', (req,res)=> {
+    let index = buscaIndexDaTask(req.params.id);
+    tarefas.splice(index,1)
+    res.send(`Atividade com ID ${req.params.id} Exluida com sucesso`);
+})
 
 
 //Função para achar um ID igual(OBS, pode ser usada a Funçao pre pronta do javascript "filter")
