@@ -34,6 +34,15 @@ app.delete('/tasks/:id', (req,res)=> {
     res.send(`Atividade com ID ${req.params.id} Exluida com sucesso`);
 })
 
+//Atualiza Task
+app.put('/tasks/:id', (req,res)=> {
+    let index = buscaIndexDaTask(req.params.id);
+    tarefas[index].titulo = req.body.titulo;
+    tarefas[index].descricao = req.body.descricao;
+    tarefas[index].status = req.body.status;
+    res.json(tarefas)
+})
+
 
 
 //Função para achar um ID igual(OBS, pode ser usada a Funçao pre pronta do javascript "filter")
