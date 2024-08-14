@@ -11,5 +11,6 @@ const conexao = mysql2.createConnection({
     database: process.env.DB_NAME
 });
 
+conexao.connect();
 
 export default conexao;
