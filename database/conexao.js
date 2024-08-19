@@ -12,5 +12,7 @@ const conexao = mysql2.createConnection({
 });
 
 conexao.connect();
+const conexaoPromise = conexao.promise();
 
-export default conexao;
+
+export default conexaoPromise;
